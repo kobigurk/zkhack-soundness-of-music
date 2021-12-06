@@ -43,4 +43,11 @@ fn test_snark() {
     let proof = prover::prove(&public_inputs, &private_inputs, &circuit, &setup);
 
     assert!(!verifier::verify(&public_inputs, &setup, &proof));
+
+    // Fail to prove that 1+1+1+1=1
+    let public_inputs = [Fr::one(), four];
+    let private_inputs = [two];
+    let proof = prover::prove(&public_inputs, &private_inputs, &circuit, &setup);
+    let public_inputs = [Fr::one(), Fr::one()];
+    assert!(!verifier::verify(&public_inputs, &setup, &proof));
 }
