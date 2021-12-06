@@ -48,8 +48,12 @@ pub fn make_circuit<E: PairingEngine>() -> Circuit<E> {
         Evaluations::<E::Fr>::from_vec_and_domain(vec![E::Fr::zero(), E::Fr::zero()], domain)
             .interpolate();
 
-    circuit.inputs.push(input_polynomial);
-    circuit.outputs.push(output_polynomial);
+    circuit
+        .inputs
+        .push(input_polynomial + domain.vanishing_polynomial().into());
+    circuit
+        .outputs
+        .push(output_polynomial + domain.vanishing_polynomial().into());
 
     // Second variable y
     // input_polynomial(c) evaluates to 1 when y is the input_variable to constraint C
@@ -63,8 +67,12 @@ pub fn make_circuit<E: PairingEngine>() -> Circuit<E> {
         Evaluations::<E::Fr>::from_vec_and_domain(vec![E::Fr::zero(), E::Fr::one()], domain)
             .interpolate();
 
-    circuit.inputs.push(input_polynomial);
-    circuit.outputs.push(output_polynomial);
+    circuit
+        .inputs
+        .push(input_polynomial + domain.vanishing_polynomial().into());
+    circuit
+        .outputs
+        .push(output_polynomial + domain.vanishing_polynomial().into());
 
     // Third variable z
     // input_polynomial(c) evaluates to 1 when z is the input_variable to constraint C
@@ -78,7 +86,11 @@ pub fn make_circuit<E: PairingEngine>() -> Circuit<E> {
         Evaluations::<E::Fr>::from_vec_and_domain(vec![E::Fr::one(), E::Fr::zero()], domain)
             .interpolate();
 
-    circuit.inputs.push(input_polynomial);
-    circuit.outputs.push(output_polynomial);
+    circuit
+        .inputs
+        .push(input_polynomial + domain.vanishing_polynomial().into());
+    circuit
+        .outputs
+        .push(output_polynomial + domain.vanishing_polynomial().into());
     circuit
 }

@@ -82,7 +82,7 @@ pub fn trusted_setup<E: PairingEngine, R: rand::Rng>(
         alpha_outputs: fr_to_g2::<E>(alpha_outputs),
         gamma: fr_to_g2::<E>(gamma),
         beta_gamma: fr_to_g2::<E>(beta * gamma),
-        rho_Z: fr_to_g2::<E>(rho * rho * circuit.Z.evaluate(&tau)),
+        rho_Z: fr_to_g2::<E>(rho * circuit.Z.evaluate(&tau)),
     }
 }
 
